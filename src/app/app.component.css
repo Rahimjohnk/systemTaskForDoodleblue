@@ -1,0 +1,41 @@
+@media only screen and (max-width: 768px) {
+    .mrg-top {
+        margin-top: 1rem;
+    }
+}
+
+.userRowStyle {
+    padding: 10px;
+}
+
+.userRowStyle:hover {
+    background   : #f3f3f3;
+    border-bottom: solid 1px #f3f3f3;
+    cursor       : pointer;
+    background   : 0 0/100% #f3f0f078;
+    transition   : background 0s;
+    font-weight  : 500;
+    box-shadow   : 5px 6px 6px #c3c3c3;
+}
+
+.pointingHand {
+    cursor: pointer;
+}
+
+.has-error {
+    border-color: rgb(216, 12, 12);
+    color       : rgb(230, 14, 14);
+}
+
+.listActive {
+    background-color: #e3e5e685;
+}
+
+.fonts-20p:hover {
+    font-size: 20px;
+    color: rgb(35, 136, 35);
+}
+
+/* .input.ng-invalid.ng-touched {
+    border: 1px solid #dd4b39;
+} */
