@@ -1,11 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand">Navbar</a>
+  <a class="navbar-brand">System Task</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+    (click)="isShown = !isShown">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" [ngClass]="{ 'show': isShown }" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
 
     </ul>
@@ -46,23 +47,29 @@
     <div class="col-md-6" style="background-color: red;">.col-6</div>
   </div> -->
   <h4 class="mb-5">
+    <i class="fa fa-book fonts-20p"></i>
     Contacts
     <br>
-    <small class="text-muted">Welcome to Contact page</small>
+    <small class="text-muted"> &nbsp; Welcome to Contact page</small>
   </h4>
 
   <div class="row">
     <div class="col-md-7">
-      <div class="input-group mb-3">
-        <input class="form-control py-2 border-right-0 border" type="search" value="Search">
+      <div class="input-group mb-4">
+
+        <input class="form-control py-2 border-right-0 border inputRoundBorder" type="search"
+          placeholder="Search Contants ">
         <span class="input-group-append">
-          <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+          <div class="input-group-text bg-transparent inputSearchBoxRoundBorder"><i class="fa fa-search"></i></div>
         </span>
+
         &nbsp; &nbsp;
-        <button type="button" class="btn btn-primary btn-sm" (click)="open(content)"><i class="fa fa-plus"></i> Add
+        <button type="button" class="btn btn-gradient btn-outline-light btn-sm" (click)="open(content)"><i
+            class="fa fa-plus"></i> Add
           Contact</button>
         &nbsp; &nbsp;
-        <button type="button" *ngIf="userList.length !== 0" class="btn btn-primary btn-sm" (click)="edit(content)"><i class="fa fa-edit (alias)"></i>
+        <button type="button" *ngIf="userList.length !== 0" class="btn btn-gradient btn-outline-light btn-sm"
+          (click)="edit(content)"><i class="fa fa-edit (alias)"></i>
           Edit Contact</button>
       </div>
     </div>
@@ -73,9 +80,9 @@
         <div class="card">
           <div class="card-header pointingHand" (click)="onList()">
             <div class="row mb-0">
-              <div class="col-2"><i [ngClass]="accordionList ? 'fa fa-plus' : 'fa fa-minus'" class="fa fa-plus"></i>
+              <div class="col-1"><i [ngClass]="accordionList ? 'fa fa-plus' : 'fa fa-minus'" class="fa fa-plus"></i>
               </div>
-              <div class="col-4">Name</div>
+              <div class="col-5">Name</div>
               <div class="col-4">Company Name</div>
               <div class="col-2">Chat</div>
             </div>
@@ -84,10 +91,29 @@
             <div class="card-body">
               <div class="row mb-2 userRowStyle" [ngClass]="{listActive: user.id === infoBox.id }"
                 *ngFor="let user of userList; let i = index" (click)="onUserListRow(user)">
-                <div class="col-2"><input type="checkbox"></div>
-                <div class="col-4">{{user.name}}</div>
-                <div class="col-4">{{user.company}}</div>
-                <div class="col-2 text-center" (click)="chat(message, user)"><i class="fa fa-comments-o fonts-20p"></i>
+                <div class="col-1">
+                  <div class="pt-8p">
+                    <input type="checkbox">
+                  </div>
+                </div>
+                <div class="col-5">
+                  <div>
+                    <div [ngClass]=" (i+1) % 2 === 0 ? 'listLetterCircleGreen': 'listLetterCircle'"
+                      class="listLetterCircle">
+                      <strong>{{user.firstLetter | uppercase }}</strong>
+                    </div>
+                    {{user.name}}
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="pt-8p">
+                    <div>{{user.company}}</div>
+                  </div>
+                </div>
+                <div class="col-2 text-center" (click)="chat(message, user)">
+                  <div class="pt-8p">
+                    <i class="fa fa-send (alias) fonts-20p"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -98,32 +124,24 @@
     <div class="col-md-5 mrg-top" *ngIf="userList.length !== 0">
       <div class="card bg-light">
         <div class="card-body">
+          <div class="letterCircle mb-3"><strong>{{infoBox.firstLetter| uppercase }}</strong>
+          </div>
           <h5 class="card-title text-center">{{infoBox.name}}</h5>
           <h6 class="card-subtitle mb-2 text-muted text-center">Software Developer</h6>
           <br>
-          <form>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Name</label>
-              <label class="col-sm-8 col-form-label">{{infoBox.name}}</label>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Email</label>
-              <label class="col-sm-8 col-form-label">{{infoBox.email}}</label>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Phone</label>
-              <label class="col-sm-8 col-form-label">{{infoBox.phone}}</label>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Company</label>
-              <label class="col-sm-8 col-form-label">{{infoBox.company}}</label>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Address</label>
-              <label class="col-sm-8 col-form-label">{{infoBox.address}}
-              </label>
-            </div>
-          </form>
+
+          <dl class="row">
+            <dt class="col-sm-4">Name</dt>
+            <dd class="col-sm-8">{{infoBox.name}}</dd>
+            <dt class="col-sm-4">Email</dt>
+            <dd class="col-sm-8">{{infoBox.email}}</dd>
+            <dt class="col-sm-4">Phone</dt>
+            <dd class="col-sm-8">{{infoBox.phone}}</dd>
+            <dt class="col-sm-4">Company</dt>
+            <dd class="col-sm-8">{{infoBox.company}}</dd>
+            <dt class="col-sm-4">Address</dt>
+            <dd class="col-sm-8">{{infoBox.address}}</dd>
+          </dl>
         </div>
       </div>
     </div>
@@ -172,7 +190,7 @@
             [ngClass]="{ 'has-error': isSubmitted && addContactForm.get('address').hasError('required') }">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-gradient btn-outline-light">Submit</button>
         </div>
       </form>
     </div>
@@ -203,9 +221,9 @@
         </div>
       </form>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary"><i class="fa fa-send (alias)"></i> Send</button>
+        <button type="button" class="btn btn-gradient btn-outline-light"><i class="fa fa-send (alias)"></i>
+          Send</button>
       </div>
     </div>
   </ng-template>
-
 </section>

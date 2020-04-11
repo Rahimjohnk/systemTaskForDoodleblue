@@ -9,6 +9,7 @@ import { User } from './user.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  isShown: boolean = false;
   title = 'systemTask';
   addContactForm: FormGroup;
   isSubmitted = false;
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   editedUserIndex: number;
   editedUser: User;
   contactStatus: string;
+  
   constructor(
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -33,6 +35,7 @@ export class AppComponent implements OnInit {
     this.addContactForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl('', Validators.required),
+      firstLetter: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       company: new FormControl('', Validators.required),
@@ -66,8 +69,10 @@ export class AppComponent implements OnInit {
     ];
     this.contactStatus = 'add';
     this.accordionList = true;
-    // this.infoBox = this.userList[0];
-    // this.mainUser = this.userList[0];
+    if (this.userList.length === 1) {
+      this.infoBox = this.userList[0];
+      this.mainUser = this.userList[0];
+    }
   }
   onList = () => {
     this.accordionList = !this.accordionList;
@@ -110,8 +115,11 @@ export class AppComponent implements OnInit {
         this.onUserListRow(this.addContactForm.value);
         this.userList[this.editedUserIndex] = this.addContactForm.value;
       } else {
+        const matches = this.addContactForm.value.name.match(/\b(\w)/g);
+        const firstLetter = matches.join('');
         this.userList.push({
           id: this.userList.length + 1,
+          firstLetter,
           name: this.addContactForm.value.name,
           email: this.addContactForm.value.email,
           phone: this.addContactForm.value.phone,
