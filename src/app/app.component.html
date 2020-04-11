@@ -5,10 +5,8 @@
     (click)="isShown = !isShown">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" [ngClass]="{ 'show': isShown }" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <button class="btn btn-light my-2 my-sm-0" type="button" (click)="open(content)"><i class="fa fa-plus"></i>
@@ -16,7 +14,6 @@
       &nbsp;
 
       <div *ngIf="userList.length !== 0" ngbDropdown display="dynamic" class="d-inline-block">
-        <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Rahimjohn</button> -->
         <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="dropdownBasic1" role="button">
           {{mainUser.name}}
         </a>
@@ -25,34 +22,16 @@
             (click)="$event.preventDefault(); onSwitchUser(i) ">{{user.name}}</button>
         </div>
       </div>
-
-      <!-- <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Rahimjohn
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </div> -->
     </form>
   </div>
 </nav>
 <section class="container">
-  <!-- Content here -->
-  <!-- <div class="row">
-    <div class="col-md-6" style="background-color: red;">.col-6</div>
-    <div class="col-md-6" style="background-color: red;">.col-6</div>
-  </div> -->
   <h4 class="mb-5">
     <i class="fa fa-book fonts-20p"></i>
     Contacts
     <br>
     <small class="text-muted"> &nbsp; Welcome to Contact page</small>
   </h4>
-
   <div class="row">
     <div class="col-md-7">
       <div class="input-group mb-4">
@@ -194,9 +173,6 @@
         </div>
       </form>
     </div>
-    <!-- <div class="modal-footer">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div> -->
   </ng-template>
 
   <ng-template #message let-c="close" let-d="dismiss">
@@ -210,9 +186,6 @@
       <form>
         <div class="form-group">
           <label for="exampleFormControlSelect1">To</label>
-          <!-- <select class="form-control" id="exampleFormControlSelect1">
-            <option *ngFor="let toUser of toUserList">{{toUser.name}}</option>
-          </select> -->
           <input type="text" disabled value="{{toUser}}" class="form-control" id="exampleFormControlSelect1">
         </div>
         <div class="form-group">
@@ -221,7 +194,8 @@
         </div>
       </form>
       <div class="modal-footer">
-        <button type="button" class="btn btn-gradient btn-outline-light"><i class="fa fa-send (alias)"></i>
+        <button type="button" class="btn btn-gradient btn-outline-light" (click)="sent()"><i
+            class="fa fa-send (alias)"></i>
           Send</button>
       </div>
     </div>

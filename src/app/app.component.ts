@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   editedUserIndex: number;
   editedUser: User;
   contactStatus: string;
-  
+
   constructor(
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -42,31 +42,7 @@ export class AppComponent implements OnInit {
       address: new FormControl('', Validators.required),
     });
 
-    this.userList = [
-      // {
-      //   id: 1,
-      //   name: 'Rahimjohn',
-      //   email: 'k.rahim001@Gmail.com',
-      //   phone: '9876543210',
-      //   company: 'Supreme Tech',
-      //   address: '150 Sri Ram Nagar, Perungalathur',
-      // }
-      // , {
-      //   id: 2,
-      //   name: 'Arun Kumar',
-      //   email: 'arunkumar@Gmail.com',
-      //   phone: '6549873210',
-      //   company: 'CSS Corp',
-      //   address: '150 Sri Ram Nagar, Perungalathur',
-      // }, {
-      //   id: 3,
-      //   name: 'Satheesh',
-      //   email: 'satheesh@Gmail.com',
-      //   phone: '7894561230',
-      //   company: 'Alten Calsoft',
-      //   address: '150 Sri Ram Nagar, Perungalathur',
-      // }
-    ];
+    this.userList = [];
     this.contactStatus = 'add';
     this.accordionList = true;
     if (this.userList.length === 1) {
@@ -90,11 +66,6 @@ export class AppComponent implements OnInit {
     this.modalService.open(content);
   }
   chat(content, user: User) {
-    // this.toUserList = this.userList.filter((element, index) => {
-    //   if (index !== i) {
-    //     return element;
-    //   }
-    // });
     if (this.mainUser !== user) {
       this.toUser = user.name;
       this.addContactForm.reset();
@@ -139,14 +110,9 @@ export class AppComponent implements OnInit {
     this.contactStatus = 'update';
     this.modalService.open(content);
     this.addContactForm.patchValue(this.infoBox);
-    // this.addContactForm.patchValue({
-    //   id: this.infoBox.id,
-    //   name: this.infoBox.name,
-    //   email: this.infoBox.email,
-    //   phone: this.infoBox.phone,
-    //   company: this.infoBox.company,
-    //   address: this.infoBox.address,
-    // });
+  }
+  sent() {
+    this.modalService.dismissAll();
   }
 
 }
