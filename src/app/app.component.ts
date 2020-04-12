@@ -43,12 +43,14 @@ export class AppComponent implements OnInit {
     });
 
     this.userList = [];
+
     this.contactStatus = 'add';
     this.accordionList = true;
-    if (this.userList.length === 1) {
-      this.infoBox = this.userList[0];
-      this.mainUser = this.userList[0];
-    }
+
+    // if (this.userList.length === 1) {
+    //   this.infoBox = this.userList[0];
+    //   this.mainUser = this.userList[0];
+    // }
   }
   onList = () => {
     this.accordionList = !this.accordionList;
@@ -60,12 +62,12 @@ export class AppComponent implements OnInit {
     this.mainUser = this.userList[index];
     this.infoBox = this.userList[index];
   }
-  open(content) {
+  open = (content) => {
     this.addContactForm.reset();
     this.contactStatus = 'add';
     this.modalService.open(content);
   }
-  chat(content, user: User) {
+  chat = (content, user: User) => {
     if (this.mainUser !== user) {
       this.toUser = user.name;
       this.addContactForm.reset();
@@ -73,7 +75,7 @@ export class AppComponent implements OnInit {
       this.modalService.open(content);
     }
   }
-  onAddContactSubmit() {
+  onAddContactSubmit = () => {
     this.isSubmitted = true;
     if (this.addContactForm.valid) {
       this.isSubmitted = false;
@@ -106,12 +108,12 @@ export class AppComponent implements OnInit {
       this.addContactForm.reset();
     }
   }
-  edit(content) {
+  edit = (content) => {
     this.contactStatus = 'update';
     this.modalService.open(content);
     this.addContactForm.patchValue(this.infoBox);
   }
-  sent() {
+  sent = () => {
     this.modalService.dismissAll();
   }
 

@@ -43,18 +43,32 @@
     background-image: linear-gradient(to right bottom, #FCAF45 0%, #F77737 51%, #E1306C 100%);
     border-radius   : 3px;
     border          : none;
+    color           : #fff !important;
 }
 
-.btn .btn:link,
+.btn,
 .btn:visited {
     outline   : 0;
     box-shadow: none !important;
+    transition: all .2s;
+}
+
+button:focus {
+    outline: none;
 }
 
 .btn.focus,
 .btn:focus {
     outline   : 0;
     box-shadow: none !important;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn:active {
+    transform: translateY(-1px);
 }
 
 .letterCircle {
